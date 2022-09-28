@@ -1,0 +1,143 @@
+[12:27 AM, 9/28/2022] JAI: data = list(
+  c("A","B","C","D","E"),
+  c("A","C","D"),
+  c("B","C","D","E"),
+  c("A","P","R"),
+  c("P","Q","R"),
+  c("A","C","D","E"),
+  c("M","N"),
+  c("A","M","N"),
+  c("A","B","C"),
+  c("A","B","C","D","E")
+)
+?aprior
+trans=transactions(data)
+trans
+distance = dist(data,method ="manhattan")
+model=apriori(distance,parameter = c(supp=0.3,conf=0.9))
+model
+inspect(model)
+[12:33 AM, 9/28/2022] JAI: data = iris
+data
+
+normalise=function(x){
+  return(x-min(x))/(max(x)-min(x))
+}
+data$Sepal.Length=normalise(data$Sepal.Length)
+data$Sepal.Width=normalise(data$Sepal.Width)
+data$Petal.Length=normalise(data$Petal.Length)
+data$Petal.Width=normalise(data$Petal.Width)
+
+ind=sample(1:nrow(data),size=(0.9*nrow(data)),replace = FALSE)
+
+train_data=data[ind,]
+train_data
+
+test_data=data[-ind,]
+test_data
+
+train_label=train_data[,5]
+train_data=train_data[,-5]
+
+test_label=test_data[,5]
+test_data=test_data[,-5]
+
+
+library(class)
+
+model=knn(train_data,test_data,train_label, k=11,6)
+model
+
+?CrossTable
+library(gmodels)
+CrossTable(model,test_label)
+[12:34 AM, 9/28/2022] JAI: data = iris
+data 
+
+
+
+ind=sample(1:nrow(data),size=(0.9*nrow(data)),replace = FALSE)
+
+train_data=data[ind,]
+train_data
+
+
+test_data=data[-ind,]
+
+test_data
+
+
+test_label=test_data[,5]
+test_data=test_data[,-5]
+
+library(e1071)
+?naiveBayes
+model=naiveBayes(Species~.,train_data)
+model
+pre=table(predict(model,test_data))
+pre
+
+?CrossTable
+library(gmodels)
+CrossTable(predict(model,test_label)
+[12:34 AM, 9/28/2022] JAI: data = iris
+data 
+
+
+
+ind=sample(1:nrow(data),size=(0.9*nrow(data)),replace = FALSE)
+
+train_data=data[ind,]
+
+
+train_data
+
+
+test_data=data[-ind,]
+
+test_data
+
+
+test_label=test_data[,5]
+test_data=test_data[,-5]
+library(party)
+model= ctree(Species~.,train_data)
+plot(model)
+
+?rpart
+model1=rpart(Species~.,train_data,minsplit=, cp=0.0001)
+plot(model1)
+library(rattle)
+fancyRpartPlot(model1)
+[12:34 AM, 9/28/2022] JAI: data=read.csv("kmeans.csv")
+data
+data=data[,-1]
+data
+library(cluster)
+?kmeans
+model=kmeans(data,3)
+model
+plot(data)
+plot(data, col=(model$cluster))
+
+int=which(model$cluster==2)
+int
+cluster_2=data[int,]
+cluster_2
+[12:35 AM, 9/28/2022] JAI: data=read.csv("kmeans.csv")
+data
+data=data[,-1]
+data
+?dist
+dist=dist(data, method = "manhattan")
+dist
+?hclust
+model=hclust(dist,method="single")
+model
+plot(model,hang=-1)
+
+model2=cutree(model,3)
+model2
+library(sparcl)
+?ColorDendrogram
+ColorDendrogram(model,model2,branchlength = 30)
