@@ -4,7 +4,9 @@ print("Let the game begin")
 data = {
     1: "Rock",
     2: "Paper",
-    3: "Scissors"
+    3: "Scissors",
+    4: "Fire",
+    5: "Water"
 }
 
 
@@ -19,20 +21,24 @@ def fetch_userchoice():
     display()
     userschoice = input("Man = ")
     userschoice = userschoice.lower()
-    #print(userschoice)
+    # print(userschoice)
     if userschoice == "rock" or userschoice == "r":
         userschoice = 1
     elif userschoice == "paper" or userschoice == "p":
         userschoice = 2
     elif userschoice == "scissors" or userschoice == "s":
         userschoice = 3
+    elif userschoice == "fire" or userschoice == "f":
+        userschoice = 4
+    elif userschoice == "Water" or userschoice == "w":
+        userschoice = 5
     else:
         userschoice = int(userschoice)
     return userschoice
 
 
 def fetch_machinceschoice():
-    machineschoice = random.randint(1, 3)
+    machineschoice = random.randint(1, 5)
     return machineschoice
 
 
@@ -45,14 +51,23 @@ def print_outcome(uc, mc, outcome):
     fr.write("\n"+str(mc)+","+str(uc)+","+outcome)
 
 
+# def fetch_outcome(uc, mc):
+#     print("Machines Choice: "+str(mc)+"\nUsers Choice: "+str(uc))
+#     if ((uc == 1 and mc == 3) or (uc == 2 and mc == 1) or (uc == 3 and mc == 2)):
+#         return ("User Wins")
+#     elif ((uc == 1 and mc == 2) or (uc == 2 and mc == 3) or (uc == 1 and mc == 3)):
+#         return ("Machine Wins")
+#     else:
+#         return ("Tie")
 def fetch_outcome(uc, mc):
     print("Machines Choice: "+str(mc)+"\nUsers Choice: "+str(uc))
-    if ((uc == 1 and mc == 3) or (uc == 2 and mc == 1) or (uc == 3 and mc == 2)):
+    if ((uc == 1 and mc == 3) or (uc == 2 and mc == 1) or (uc == 3 and mc == 2) or
+     (uc == 1 and mc == 4) or (uc == 4 and mc == 2) or  (uc == 4 and mc == 3) or (uc == 5 and mc < 5)):
         return ("User Wins")
-    elif ((uc == 1 and mc == 2) or (uc == 2 and mc == 3) or (uc == 1 and mc == 3)):
-        return ("Machine Wins")
-    else:
+    elif (uc == mc):
         return ("Tie")
+    else:
+        return ("Machine Wins")
 
 
 count = int(input("How many times do you wanna play: "))

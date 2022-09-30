@@ -1,3 +1,7 @@
 UserChoice,Machineschoice,Outcome
 2,2,Tie
-3,3,Tie
+5,5,Tie
+4,5,User Wins
+2,3,User Wins
+1,4,Machine Wins
+4,2,Machine Wins
